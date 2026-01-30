@@ -5,7 +5,7 @@
 [node name="Board" type="Node2D"]
 script = ExtResource("1_7vhq7")
 
-[node name="Marker2D" type="Marker2D" parent="."]
+[node name="Marker2D1" type="Marker2D" parent="."]
 position = Vector2(660, 1160)
 
 [node name="Marker2D2" type="Marker2D" parent="."]

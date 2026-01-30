@@ -16,21 +16,21 @@ var move_logic = {
 }
 
 func _ready():
-	# 1. spot_positions 초기화 확인
-	spot_positions.clear() 
+	spot_positions.clear()
 	
-	# 2. Board 노드 아래의 모든 자식을 돌며 좌표 저장
+	# 이름 상관없이 Board의 자식들을 순서대로 1, 2, 3... 번으로 등록
+	var index = 1
 	for marker in $Board.get_children():
 		if marker is Marker2D:
-			var id = int(marker.name) # 마커의 이름(1, 2, 3...)을 숫자로 변환
-			spot_positions[id] = marker.global_position
-			print("마커 로드: ", id, "번 위치 ", spot_positions[id]) # 디버깅용 출력
-
-	# 3. 1번 마커가 정상적으로 로드되었는지 최종 확인
+			spot_positions[index] = marker.global_position
+			index += 1
+	
+	print("등록된 마커 개수: ", spot_positions.size())
+	print("등록된 마커 번호들: ", spot_positions.keys())
+	
+	# 시작 위치 설정
 	if spot_positions.has(1):
-		player.global_position = spot_positions[1]
-	else:
-		push_error("에러: 1번 마커를 찾을 수 없습니다! 마커 이름을 확인해주세요.")
+		$Player.global_position = spot_positions[1]
 
 # 버튼을 눌렀을 때 실행될 함수
 func _on_button_pressed():
