@@ -3,7 +3,7 @@
 
 <div align=center>
 
-  [ **[ 🎮 윷놀이 바로가기 ]** ](https://ojoj717.github.io/yut-nori-html/index.html)
+  [ **[ 🎮 윷놀이 바로가기 ]** ](https://ojoj717.github.io/Yut-Nori-html-Project/yut-nori-html/index.html)
 
 </div>
 
