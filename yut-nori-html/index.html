@@ -15,6 +15,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            font-family: sans-serif;
         }
 
         #game-box {
@@ -26,6 +27,9 @@
             border-radius: 30px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #canvas {
@@ -59,7 +63,18 @@
 
         #status-progress {
             width: 60%;
+            height: 10px;
             margin-top: 20px;
+            appearance: none;
+        }
+
+        #status-progress::-webkit-progress-bar { background-color: #444; border-radius: 5px; }
+        #status-progress::-webkit-progress-value { background-color: #ff4444; border-radius: 5px; }
+
+        #status-notice {
+            margin-top: 10px;
+            color: #aaa;
+            font-size: 14px;
         }
     </style>
     <link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
@@ -69,23 +84,34 @@
 <body>
     <div id="game-box">
         <canvas id="canvas">
-            Your browser does not support the canvas tag.
+            이 브라우저는 HTML5 캔버스를 지원하지 않습니다.
         </canvas>
 
         <div id="status">
-            <img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="index.png" alt="">
-            <progress id="status-progress"></progress>
+            <img id="status-splash" src="index.png" alt="Loading...">
+            <progress id="status-progress" value="0" max="100"></progress>
             <div id="status-notice"></div>
         </div>
     </div>
+
     <noscript>
-        Your browser does not support JavaScript.
+        이 게임은 자바스크립트가 활성화되어야 작동합니다.
     </noscript>
 
     <script src="index.js"></script>
     <script>
-        const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":290712,"index.wasm":36145869},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
-        const GODOT_THREADS_ENABLED = false;
+        const GODOT_CONFIG = {
+            "args":[],
+            "canvasResizePolicy":2,
+            "emscriptenPoolSize":8,
+            "ensureCrossOriginIsolationHeaders":true,
+            "executable":"index",
+            "experimentalVK":false,
+            "fileSizes":{"index.pck":290712,"index.wasm":36145869},
+            "focusCanvas":true,
+            "gdextensionLibs":[],
+            "godotPoolSize":4
+        };
         const engine = new Engine(GODOT_CONFIG);
 
         (function () {
@@ -108,14 +134,25 @@
                 statusMode = mode;
             }
 
-            if (Engine.getMissingFeatures({threads: GODOT_THREADS_ENABLED}).length !== 0) {
+            function displayFailureNotice(err) {
+                console.error(err);
+                statusNotice.innerText = err instanceof Error ? err.message : String(err);
+                statusNotice.style.display = 'block';
+                setStatusMode('notice');
+                initializing = false;
+            }
+
+            if (Engine.getMissingFeatures().length !== 0) {
+                displayFailureNotice("필요한 브라우저 기능을 지원하지 않습니다.");
             } else {
                 setStatusMode('progress');
                 engine.startGame({
                     'onProgress': function (current, total) {
                         if (total > 0) statusProgress.value = (current / total) * 100;
                     },
-                }).then(() => { setStatusMode('hidden'); });
+                }).then(() => { 
+                    setStatusMode('hidden'); 
+                }, displayFailureNotice);
             }
         }());
     </script>
