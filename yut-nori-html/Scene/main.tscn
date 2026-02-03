@@ -1,25 +1,119 @@
-[gd_scene load_steps=4 format=3 uid="uid://crjp31hsoqsg8"]
+[gd_scene load_steps=8 format=3 uid="uid://crjp31hsoqsg8"]
 
 [ext_resource type="Script" uid="uid://cknfqsasm4kwu" path="res://Scripts/main.gd" id="1_sblpm"]
 [ext_resource type="PackedScene" uid="uid://c10vc5ftyrxyi" path="res://Scene/board.tscn" id="2_r34rm"]
+[ext_resource type="Texture2D" uid="uid://ctxfl8c6y07q2" path="res://Img/player1.png" id="3_2wwxx"]
 [ext_resource type="FontFile" uid="uid://brq4cv650tjwb" path="res://Font/Cafe24PROUP.ttf" id="3_r34rm"]
+[ext_resource type="Texture2D" uid="uid://gybi5l3fmksu" path="res://Img/player2.png" id="4_ow1sv"]
+[ext_resource type="Texture2D" uid="uid://bfkiepw6bi7jl" path="res://Img/player3.png" id="5_75buv"]
+[ext_resource type="Texture2D" uid="uid://dqdnfxlgj0o0r" path="res://Img/player4.png" id="6_c2iwn"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sblpm")
 
 [node name="Board" parent="." instance=ExtResource("2_r34rm")]
 
-[node name="Player" type="ColorRect" parent="."]
-offset_right = 32.0
-offset_bottom = 32.0
-color = Color(1, 0, 0, 1)
-
 [node name="Button" type="Button" parent="."]
-offset_left = 154.06451
-offset_top = 324.0
-offset_right = 598.6774
-offset_bottom = 503.0
+offset_left = 140.0
+offset_top = 792.0
+offset_right = 584.6129
+offset_bottom = 971.0
 theme_override_fonts/font = ExtResource("3_r34rm")
 text = "윷 던지기"
+
+[node name="Pieces" type="Node2D" parent="."]
+
+[node name="player0" type="Node2D" parent="Pieces"]
+
+[node name="Piece1" type="Sprite2D" parent="Pieces/player0"]
+texture = ExtResource("3_2wwxx")
+
+[node name="Piece2" type="Sprite2D" parent="Pieces/player0"]
+texture = ExtResource("3_2wwxx")
+
+[node name="Piece3" type="Sprite2D" parent="Pieces/player0"]
+texture = ExtResource("3_2wwxx")
+
+[node name="Piece4" type="Sprite2D" parent="Pieces/player0"]
+texture = ExtResource("3_2wwxx")
+
+[node name="player1" type="Node2D" parent="Pieces"]
+
+[node name="Piece1" type="Sprite2D" parent="Pieces/player1"]
+texture = ExtResource("4_ow1sv")
+
+[node name="Piece2" type="Sprite2D" parent="Pieces/player1"]
+texture = ExtResource("4_ow1sv")
+
+[node name="Piece3" type="Sprite2D" parent="Pieces/player1"]
+texture = ExtResource("4_ow1sv")
+
+[node name="Piece4" type="Sprite2D" parent="Pieces/player1"]
+texture = ExtResource("4_ow1sv")
+
+[node name="player2" type="Node2D" parent="Pieces"]
+
+[node name="Piece1" type="Sprite2D" parent="Pieces/player2"]
+texture = ExtResource("5_75buv")
+
+[node name="Piece2" type="Sprite2D" parent="Pieces/player2"]
+texture = ExtResource("5_75buv")
+
+[node name="Piece3" type="Sprite2D" parent="Pieces/player2"]
+texture = ExtResource("5_75buv")
+
+[node name="Piece4" type="Sprite2D" parent="Pieces/player2"]
+texture = ExtResource("5_75buv")
+
+[node name="player3" type="Node2D" parent="Pieces"]
+
+[node name="Piece1" type="Sprite2D" parent="Pieces/player3"]
+texture = ExtResource("6_c2iwn")
+
+[node name="Piece2" type="Sprite2D" parent="Pieces/player3"]
+texture = ExtResource("6_c2iwn")
+
+[node name="Piece3" type="Sprite2D" parent="Pieces/player3"]
+texture = ExtResource("6_c2iwn")
+
+[node name="Piece4" type="Sprite2D" parent="Pieces/player3"]
+texture = ExtResource("6_c2iwn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StartMenu" type="Node2D" parent="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/StartMenu"]
+offset_left = 28.0
+offset_top = 312.0
+offset_right = 680.0
+offset_bottom = 497.0
+
+[node name="2" type="Button" parent="CanvasLayer/StartMenu/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_r34rm")
+text = "2인용
+"
+
+[node name="3" type="Button" parent="CanvasLayer/StartMenu/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_r34rm")
+text = "3인용
+"
+
+[node name="4" type="Button" parent="CanvasLayer/StartMenu/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_r34rm")
+text = "4인용"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
