@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7jowfg5fr6hs"]
+
+[ext_resource type="Texture2D" uid="uid://62bjcsy8lh6m" path="res://Img/BG.png" id="1_75qdg"]
+[ext_resource type="Script" uid="uid://c4lai0jwdkhxv" path="res://Scripts/title.gd" id="1_gcboo"]
+[ext_resource type="FontFile" uid="uid://brq4cv650tjwb" path="res://Font/Cafe24PROUP.ttf" id="1_h6y6f"]
+[ext_resource type="Texture2D" uid="uid://bwnpd8xiq0mx" path="res://Img/b_rec.png" id="4_p6i14"]
+[ext_resource type="Texture2D" uid="uid://ctoe66dqqc5ne" path="res://Img/b_p_rec.png" id="5_xriko"]
+[ext_resource type="Texture2D" uid="uid://c0xm1nme8fwcd" path="res://Img/b_h_rec.png" id="6_p5xl0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a0o0u"]
+texture = ExtResource("4_p6i14")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_snarr"]
+texture = ExtResource("5_xriko")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pkr7l"]
+texture = ExtResource("6_p5xl0")
+
+[node name="title" type="Node2D"]
+script = ExtResource("1_gcboo")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(360, 639)
+texture = ExtResource("1_75qdg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StartMenu" type="Node2D" parent="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/StartMenu"]
+offset_left = 40.0
+offset_top = 568.0
+offset_right = 692.0
+offset_bottom = 753.0
+
+[node name="2" type="Button" parent="CanvasLayer/StartMenu/HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_focus_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_hover_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_fonts/font = ExtResource("1_h6y6f")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_a0o0u")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_snarr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_pkr7l")
+text = "2인용
+"
+
+[node name="3" type="Button" parent="CanvasLayer/StartMenu/HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_focus_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_hover_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_fonts/font = ExtResource("1_h6y6f")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_a0o0u")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_snarr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_pkr7l")
+text = "3인용
+"
+
+[node name="4" type="Button" parent="CanvasLayer/StartMenu/HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_focus_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_hover_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_fonts/font = ExtResource("1_h6y6f")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_a0o0u")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_snarr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_pkr7l")
+text = "4인용
+"

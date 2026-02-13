@@ -2,8 +2,6 @@ extends Node2D
 
 @onready var roll_button = $Button 
 @onready var pieces_parent = $Pieces
-@onready var start_menu = $CanvasLayer/StartMenu
-@onready var button_container = $CanvasLayer/StartMenu/HBoxContainer
 
 var player_groups = []
 var is_moving = false
@@ -16,15 +14,12 @@ func _ready():
 	for p in pieces_parent.get_children():
 		p.visible = false
 	
-	# 이미지 구조에 맞게 HBoxContainer 안의 버튼들을 연결
-	for btn in button_container.get_children():
-		if btn is Button:
-			btn.pressed.connect(_on_player_count_selected.bind(int(btn.name)))
-
-func _on_player_count_selected(count):
-	start_menu.visible = false
+	_initialize_game_board()
+	
+func _initialize_game_board():
 	game_started = true
-	Data.setup_game(count)
+	# Data.setup_game은 이미 이전 씬에서 했으므로 호출할 필요 없음
+	var count = Data.player_count 
 	
 	player_groups = pieces_parent.get_children().slice(0, count)
 	
@@ -35,11 +30,10 @@ func _on_player_count_selected(count):
 			Data.spot_positions[index] = marker.global_position
 			index += 1
 	
-	for p_idx in range(Data.player_count):
+	for p_idx in range(count):
 		player_groups[p_idx].visible = true
 		var p_nodes = player_groups[p_idx].get_children()
 		for i in range(p_nodes.size()):
-			p_nodes[i].scale = Vector2(0.06, 0.06)
 			p_nodes[i].global_position = Vector2(100 + (p_idx * 150), 150 + (i * 70))
 	
 	roll_button.visible = true
@@ -87,7 +81,12 @@ func _on_piece_selected(piece_idx):
 	show_move_indicators(piece_idx, routes)
 
 func show_move_indicators(piece_idx, routes):
-	var indicator_tex = preload("res://Img/s_s_circle.png")
+	var small_indicator = preload("res://Img/s_s_circle.png")
+	var big_indicator = preload("res://Img/b_s_circle.png")
+	
+	# 특수 칸 번호 목록
+	var special_spots = [1, 6, 11, 16, 23]
+
 	for route in routes:
 		var target_spot = route[-1]
 		if target_spot == 100:
@@ -99,9 +98,19 @@ func show_move_indicators(piece_idx, routes):
 			indicators.append(exit_btn)
 		else:
 			var btn = TextureButton.new()
-			btn.texture_normal = indicator_tex
-			btn.scale = Vector2(0.06, 0.06)
-			var offset = (indicator_tex.get_size() * 0.06) / 2
+			var target_scale = Vector2(1, 1)
+			
+			if target_spot in special_spots:
+				btn.texture_normal = big_indicator
+				target_scale = Vector2(1, 1)
+			else:
+				btn.texture_normal = small_indicator
+			
+			btn.scale = target_scale
+			
+			var current_tex = btn.texture_normal
+			var offset = (current_tex.get_size() * target_scale) / 2
+			
 			btn.global_position = Data.spot_positions[target_spot] - offset
 			btn.pressed.connect(_on_target_selected.bind(piece_idx, route))
 			btn.z_index = 10
