@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7jowfg5fr6hs"]
+[gd_scene load_steps=11 format=3 uid="uid://c7jowfg5fr6hs"]
 
 [ext_resource type="Texture2D" uid="uid://62bjcsy8lh6m" path="res://Img/BG.png" id="1_75qdg"]
 [ext_resource type="Script" uid="uid://c4lai0jwdkhxv" path="res://Scripts/title.gd" id="1_gcboo"]
 [ext_resource type="FontFile" uid="uid://brq4cv650tjwb" path="res://Font/Cafe24PROUP.ttf" id="1_h6y6f"]
+[ext_resource type="Texture2D" uid="uid://dytw20i2oju17" path="res://Img/logo_ko.png" id="3_xriko"]
 [ext_resource type="Texture2D" uid="uid://bwnpd8xiq0mx" path="res://Img/b_rec.png" id="4_p6i14"]
 [ext_resource type="Texture2D" uid="uid://ctoe66dqqc5ne" path="res://Img/b_p_rec.png" id="5_xriko"]
 [ext_resource type="Texture2D" uid="uid://c0xm1nme8fwcd" path="res://Img/b_h_rec.png" id="6_p5xl0"]
@@ -23,15 +24,19 @@ script = ExtResource("1_gcboo")
 position = Vector2(360, 639)
 texture = ExtResource("1_75qdg")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(360, 296)
+texture = ExtResource("3_xriko")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="StartMenu" type="Node2D" parent="CanvasLayer"]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/StartMenu"]
-offset_left = 40.0
-offset_top = 568.0
-offset_right = 692.0
-offset_bottom = 753.0
+offset_left = 60.0
+offset_top = 764.0
+offset_right = 712.0
+offset_bottom = 949.0
 
 [node name="2" type="Button" parent="CanvasLayer/StartMenu/HBoxContainer"]
 custom_minimum_size = Vector2(200, 100)
