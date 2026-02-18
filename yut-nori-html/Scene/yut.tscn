@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dohy8xdv5ml3m"]
+
+[ext_resource type="Texture2D" uid="uid://ci2s343xc7uu" path="res://Img/front_yut.png" id="1_1bg50"]
+[ext_resource type="Script" uid="uid://21wuofr0inol" path="res://Scene/yut.gd" id="1_tndna"]
+[ext_resource type="Texture2D" uid="uid://b0lyf1xkm0aec" path="res://Img/back_yut.png" id="2_tndna"]
+
+[node name="yut" type="Node2D"]
+script = ExtResource("1_tndna")
+
+[node name="front" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_1bg50")
+
+[node name="back" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_tndna")

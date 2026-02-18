@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var roll_button = $Button 
 @onready var pieces_parent = $Pieces
+@onready var yut_container = $yut
+@onready var result_label = $ResultLabel
 
 var player_groups = []
 var is_moving = false
@@ -11,6 +13,8 @@ var game_started = false
 
 func _ready():
 	roll_button.visible = false
+	yut_container.visible = false
+	
 	for p in pieces_parent.get_children():
 		p.visible = false
 	
@@ -39,16 +43,12 @@ func _initialize_game_board():
 	roll_button.visible = true
 
 func _on_button_pressed():
-	if is_moving or not game_started: return
-	var result = roll_yut()
-	current_roll_steps = result["steps"]
-	
-	if current_roll_steps == 0:
-		next_turn()
+	if is_moving or not game_started:
 		return
-	
+		
 	roll_button.visible = false
-	show_piece_selection()
+	
+	await play_yut_roll()
 
 func show_piece_selection():
 	clear_indicators()
@@ -181,6 +181,7 @@ func _on_target_selected(piece_idx, full_route):
 			next_turn()
 
 func next_turn():
+	result_label.visible = false   # 🔥 추가
 	Data.current_player = (Data.current_player + 1) % Data.player_count
 	roll_button.visible = true
 
@@ -218,6 +219,25 @@ func calculate_targets(start_spot, steps):
 func clear_indicators():
 	for ind in indicators: ind.queue_free()
 	indicators.clear()
+	
+func play_yut_roll():
+	yut_container.visible = true
+	
+	var result = roll_yut()
+	current_roll_steps = result["steps"]
+	
+	await animate_yuts(result)
+	await show_result(result)
+	
+	# 🔥 결과 잠깐 보여준 뒤 사라짐
+	await get_tree().create_timer(0.7).timeout
+	hide_yuts()
+	
+	if current_roll_steps == 0:
+		next_turn()
+	else:
+		show_piece_selection()
+
 
 func roll_yut():
 	var roll = randf()
@@ -229,3 +249,72 @@ func roll_yut():
 	elif sub < 0.85: return {"name":"걸","steps":3}
 	elif sub < 0.98: return {"name":"윷","steps":4}
 	else: return {"name":"모","steps":5}
+	
+func get_yut_faces(result_name:String):
+	match result_name:
+		"도": return [true,false,false,false]
+		"개": return [true,true,false,false]
+		"걸": return [true,true,true,false]
+		"윷": return [true,true,true,true]
+		"모": return [false,false,false,false]
+		"빽도": return [false,false,false,true]
+		_: return [false,false,false,false]
+		
+func animate_yuts(result):
+	var faces = get_yut_faces(result["name"])
+	
+	for i in range(4):
+		var yut = yut_container.get_child(i)
+		
+		yut.show_side(randi() % 2 == 0)
+		
+		var delay = i * 0.08
+		
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_BACK)
+		tween.set_ease(Tween.EASE_OUT)
+		
+		var original_y = yut.position.y
+		
+		tween.tween_property(yut, "position:y",
+			original_y - 150, 0.25).set_delay(delay)
+		
+		tween.tween_property(yut, "position:y",
+			original_y, 0.3)
+		
+		tween.tween_property(yut, "scale",
+			Vector2(1.2,0.8), 0.1)
+		
+		tween.tween_property(yut, "scale",
+			Vector2(1,1), 0.15)
+		
+		await tween.finished
+		
+		yut.show_side(faces[i])
+
+
+func show_result(result):
+	if result_label == null:
+		return
+	
+	result_label.visible = true
+	result_label.text = result["name"]
+	result_label.scale = Vector2(1,1)
+	
+	var tween = create_tween()
+	tween.tween_property(result_label,"scale",
+		Vector2(1.2,1.2),0.1)
+	tween.tween_property(result_label,"scale",
+		Vector2(1,1),0.1)
+	
+	await tween.finished
+
+
+func hide_yuts():
+	var tween = create_tween()
+	
+	tween.tween_property(yut_container, "modulate:a", 0.0, 0.2)
+	await tween.finished
+	
+	yut_container.visible = false
+	yut_container.modulate.a = 1.0

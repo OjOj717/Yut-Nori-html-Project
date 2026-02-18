@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://crjp31hsoqsg8"]
+[gd_scene load_steps=16 format=3 uid="uid://crjp31hsoqsg8"]
 
 [ext_resource type="Script" uid="uid://cknfqsasm4kwu" path="res://Scripts/main.gd" id="1_sblpm"]
 [ext_resource type="Texture2D" uid="uid://62bjcsy8lh6m" path="res://Img/BG.png" id="2_c2iwn"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dqdnfxlgj0o0r" path="res://Img/player4.png" id="6_c2iwn"]
 [ext_resource type="Texture2D" uid="uid://ctoe66dqqc5ne" path="res://Img/b_p_rec.png" id="6_mxd2g"]
 [ext_resource type="Texture2D" uid="uid://c0xm1nme8fwcd" path="res://Img/b_h_rec.png" id="7_0sxm5"]
+[ext_resource type="PackedScene" uid="uid://dohy8xdv5ml3m" path="res://Scene/yut.tscn" id="12_mxd2g"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7y4ci"]
 texture = ExtResource("5_7y4ci")
@@ -29,6 +30,30 @@ position = Vector2(360, 639)
 texture = ExtResource("2_c2iwn")
 
 [node name="Board" parent="." instance=ExtResource("2_r34rm")]
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 108.0
+offset_top = 756.0
+offset_right = 608.0
+offset_bottom = 956.0
+grow_horizontal = 0
+pivot_offset = Vector2(204, 64)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_focus_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_hover_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
+theme_override_fonts/font = ExtResource("3_r34rm")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_7y4ci")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_mxd2g")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0sxm5")
+text = "윷 던지기"
 
 [node name="Pieces" type="Node2D" parent="."]
 
@@ -88,28 +113,31 @@ texture = ExtResource("6_c2iwn")
 [node name="Piece4" type="Sprite2D" parent="Pieces/player3"]
 texture = ExtResource("6_c2iwn")
 
-[node name="Button" type="Button" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = 108.0
-offset_top = 756.0
-offset_right = 608.0
-offset_bottom = 956.0
-grow_horizontal = 0
-pivot_offset = Vector2(204, 64)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_color = Color(0.47843137, 0.2901961, 0, 1)
-theme_override_colors/font_focus_color = Color(0.47843137, 0.2901961, 0, 1)
-theme_override_colors/font_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
-theme_override_colors/font_hover_color = Color(0.47843137, 0.2901961, 0, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.47843137, 0.2901961, 0, 1)
-theme_override_fonts/font = ExtResource("3_r34rm")
-theme_override_font_sizes/font_size = 50
-theme_override_styles/normal = SubResource("StyleBoxTexture_7y4ci")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_mxd2g")
-theme_override_styles/hover = SubResource("StyleBoxTexture_0sxm5")
-text = "윷 던지기"
+[node name="yut" type="Node2D" parent="."]
+z_index = 10
+position = Vector2(-324.00006, 1424)
+rotation = 0.7853982
+
+[node name="1" parent="yut" instance=ExtResource("12_mxd2g")]
+position = Vector2(-60, -764)
+rotation = 0.7853982
+
+[node name="2" parent="yut" instance=ExtResource("12_mxd2g")]
+position = Vector2(207.4256, -1031.4255)
+rotation = 0.7853982
+
+[node name="3" parent="yut" instance=ExtResource("12_mxd2g")]
+position = Vector2(119.744354, -943.7444)
+rotation = 0.7853982
+
+[node name="4" parent="yut" instance=ExtResource("12_mxd2g")]
+position = Vector2(29.23468, -853.2347)
+rotation = 0.7853982
+
+[node name="ResultLabel" type="Label" parent="."]
+offset_left = 208.0
+offset_top = 808.0
+offset_right = 504.0
+offset_bottom = 904.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
