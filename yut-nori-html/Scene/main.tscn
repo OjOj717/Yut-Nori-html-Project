@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dqdnfxlgj0o0r" path="res://Img/player4.png" id="6_c2iwn"]
 [ext_resource type="Texture2D" uid="uid://ctoe66dqqc5ne" path="res://Img/b_p_rec.png" id="6_mxd2g"]
 [ext_resource type="Texture2D" uid="uid://c0xm1nme8fwcd" path="res://Img/b_h_rec.png" id="7_0sxm5"]
-[ext_resource type="PackedScene" uid="uid://dohy8xdv5ml3m" path="res://Scene/yut.tscn" id="12_mxd2g"]
+[ext_resource type="PackedScene" uid="uid://dcbqpjgiaup35" path="res://Scene/yut_roller.tscn" id="12_mxd2g"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7y4ci"]
 texture = ExtResource("5_7y4ci")
@@ -32,6 +32,7 @@ texture = ExtResource("2_c2iwn")
 [node name="Board" parent="." instance=ExtResource("2_r34rm")]
 
 [node name="Button" type="Button" parent="."]
+z_index = 10
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -113,31 +114,7 @@ texture = ExtResource("6_c2iwn")
 [node name="Piece4" type="Sprite2D" parent="Pieces/player3"]
 texture = ExtResource("6_c2iwn")
 
-[node name="yut" type="Node2D" parent="."]
+[node name="yut_roller" parent="." instance=ExtResource("12_mxd2g")]
 z_index = 10
-position = Vector2(-324.00006, 1424)
-rotation = 0.7853982
-
-[node name="1" parent="yut" instance=ExtResource("12_mxd2g")]
-position = Vector2(-60, -764)
-rotation = 0.7853982
-
-[node name="2" parent="yut" instance=ExtResource("12_mxd2g")]
-position = Vector2(207.4256, -1031.4255)
-rotation = 0.7853982
-
-[node name="3" parent="yut" instance=ExtResource("12_mxd2g")]
-position = Vector2(119.744354, -943.7444)
-rotation = 0.7853982
-
-[node name="4" parent="yut" instance=ExtResource("12_mxd2g")]
-position = Vector2(29.23468, -853.2347)
-rotation = 0.7853982
-
-[node name="ResultLabel" type="Label" parent="."]
-offset_left = 208.0
-offset_top = 808.0
-offset_right = 504.0
-offset_bottom = 904.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

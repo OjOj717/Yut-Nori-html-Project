@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://843bdxq427a1"]
+
+[ext_resource type="Texture2D" uid="uid://ci2s343xc7uu" path="res://Img/front_yut.png" id="1_0ct1m"]
+[ext_resource type="Texture2D" uid="uid://bv2s5i8p8yjm" path="res://Img/back_back_yut.png" id="2_0ct1m"]
+
+[node name="back_yut" type="Node2D"]
+
+[node name="front" type="Sprite2D" parent="."]
+texture = ExtResource("1_0ct1m")
+
+[node name="back" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_0ct1m")

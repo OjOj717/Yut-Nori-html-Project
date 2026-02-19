@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcbqpjgiaup35"]
+
+[ext_resource type="Script" uid="uid://20tli0tund71" path="res://Scripts/yut_roller.gd" id="1_dcbtv"]
+[ext_resource type="PackedScene" uid="uid://dohy8xdv5ml3m" path="res://Scene/yut.tscn" id="1_nw0w6"]
+[ext_resource type="Texture2D" uid="uid://dm5ivip7rot38" path="res://Img/yut_board.png" id="2_uphk4"]
+[ext_resource type="FontFile" uid="uid://brq4cv650tjwb" path="res://Font/Cafe24PROUP.ttf" id="4_lwmj1"]
+[ext_resource type="PackedScene" uid="uid://843bdxq427a1" path="res://Scene/back_yut.tscn" id="4_p2rvj"]
+[ext_resource type="Script" uid="uid://21wuofr0inol" path="res://Scripts/yut.gd" id="5_1w860"]
+
+[node name="yut_roller" type="Node2D"]
+script = ExtResource("1_dcbtv")
+
+[node name="YutBoard" type="Sprite2D" parent="."]
+position = Vector2(360, 860)
+texture = ExtResource("2_uphk4")
+
+[node name="yut" type="Node2D" parent="."]
+z_index = 10
+position = Vector2(-132, 1276)
+rotation = 0.7853982
+scale = Vector2(0.49999997, 0.49999997)
+
+[node name="1" parent="yut" instance=ExtResource("1_nw0w6")]
+position = Vector2(-2.828392, -1335.0176)
+rotation = 0.7853982
+
+[node name="2" parent="yut" instance=ExtResource("1_nw0w6")]
+position = Vector2(65.053894, -1097.4297)
+rotation = 0.7853982
+
+[node name="3" parent="yut" instance=ExtResource("1_nw0w6")]
+position = Vector2(234.7595, -1278.4491)
+rotation = 0.7853982
+
+[node name="4" parent="yut" instance=ExtResource("4_p2rvj")]
+position = Vector2(166.87723, -1516.0369)
+rotation = 0.7853982
+script = ExtResource("5_1w860")
+
+[node name="ResultLabel" type="Label" parent="."]
+offset_left = 356.0
+offset_top = 1048.0
+offset_right = 385.0
+offset_bottom = 1083.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_lwmj1")
+theme_override_font_sizes/font_size = 30
+text = "윷"
